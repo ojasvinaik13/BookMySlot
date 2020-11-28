@@ -1,0 +1,21 @@
+.container {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    color: #405065;
+  }
+  
+  .search-store {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin: auto;
+  }
+  
+  .form-control {
+    box-shadow: 0 10px 40px 0 #b0c1d9;
+    height: 50px;
+    width: 400px;
+  }
+  .form-control::placeholder {
+    font-family: FontAwesome;
+  }
+  
