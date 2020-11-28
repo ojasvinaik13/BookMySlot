@@ -4,6 +4,7 @@
 .storeTitle span{
     padding-left: 30px;
     font-size: 50px;
+    color: #405065;
 }
 ngb-rating{
     color: #fdcc0d;
