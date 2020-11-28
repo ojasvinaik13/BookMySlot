@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginStatusService } from '../login-status.service';
 
 @Component({
   selector: 'app-search-store',
@@ -20,30 +22,15 @@ export class SearchStoreComponent implements OnInit {
     { id: 19, name: "Food Mart", rating: "3" },
     { id: 20, name: "Ganesh Stores", rating: "4.9" }
   ];
-  constructor() { }
-
-  ngOnInit(): void {
-    var mongoose =  require('mongoose');
-    mongoose.connect('mongodb://127.0.0.1:27017/BookMySlot');
-
-    var db = mongoose.connection;
-
-    db.on('error',console.error.bind(console,'Connection error'));
-
-    db.once('open',function(){
-        console.log("Connection successful");
-    });
-
-    var ShopSchema = mongoose.Schema({
-        shop_id: Number,
-        name: String,
-        slot_limit: String,
-        reserved_slots: Array
-    });
-
-    var Shops = mongoose.model('Shop', ShopSchema);
-
-    
-
+  
+  constructor(private Auth: LoginStatusService, private router: Router) { 
   }
+  logoutUser(){
+    this.Auth.logOut();
+    this.router.navigate(['/']);
+  }
+  ngOnInit(): void {
+  
+  }
+  
 }

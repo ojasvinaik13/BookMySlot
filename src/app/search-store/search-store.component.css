@@ -3,7 +3,9 @@
     padding-bottom: 10px;
     color: #405065;
   }
-  
+  #logout{
+    margin: 20px;
+  }
   .search-store {
     max-width: 500px;
     padding-bottom: 50px;

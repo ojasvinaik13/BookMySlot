@@ -1,1 +1,31 @@
-<p>store works!</p>
+<div class="storeTitle"><span>{{storeDetails.name}}</span> <ngb-rating [max]="5" [(rate)]=currentRate [readonly]="true"></ngb-rating></div>
+
+<hr>
+
+
+<div class="row times">
+    
+    <div class="col-xs-4 text-center" *ngFor="let day of days">
+        <div>{{day.name}}</div>
+             
+      
+      
+      <div class="time-slot" *ngFor="let slot of day.slots">    	
+        <!-- <input type="checkbox" ng-model="slot.booked" ng-disabled="slot.booked"> -->
+        <div *ngIf=slot.booked class="bo" style="background:#f2dede;">
+            <div style="background:#f2dede;">{{slot.time}}</div>
+            <span>Booked</span>
+        </div>
+        <div *ngIf=!slot.booked class="av" style="background:#6AB074;">
+            <div style="background:#6AB074;">{{slot.time}}</div>
+            <span>Available</span>
+        </div>
+        <!-- <label>{{ slot.time }}<br>
+          <span *ngIf=slot.booked>Booked</span>
+           <span *ngIf=!slot.booked>Available</span> 
+        </label> -->
+      </div>
+      
+    </div>       
+      
+  </div>    
