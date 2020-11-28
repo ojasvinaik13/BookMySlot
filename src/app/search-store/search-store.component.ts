@@ -23,6 +23,27 @@ export class SearchStoreComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
+    var mongoose =  require('mongoose');
+    mongoose.connect('mongodb://127.0.0.1:27017/BookMySlot');
 
+    var db = mongoose.connection;
+
+    db.on('error',console.error.bind(console,'Connection error'));
+
+    db.once('open',function(){
+        console.log("Connection successful");
+    });
+
+    var ShopSchema = mongoose.Schema({
+        shop_id: Number,
+        name: String,
+        slot_limit: String,
+        reserved_slots: Array
+    });
+
+    var Shops = mongoose.model('Shop', ShopSchema);
+
+    
+
+  }
 }

@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "BookMySlot"
+  "defaultProject": "BookMySlot",
+  "cli": {
+    "analytics": "5519b0dd-d6f4-488d-8b6e-ebb1b1677025"
+  }
 }
