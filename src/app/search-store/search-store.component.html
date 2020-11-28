@@ -1,3 +1,4 @@
+<button class="btn btn-danger" id="logout" (click)="logoutUser()">Logout</button>
 <div class="container text-center">
     <h1>{{title}}</h1>
   </div>
@@ -24,7 +25,7 @@
         <tbody>
           <tr *ngFor="let store of stores | filter:searchText">
             <td>{{store.id}}</td>
-            <td>{{store.name}}</td>
+            <td><a [routerLink]="['/store',store.id]">{{store.name}}</a></td>
             <td>{{store.rating}}</td>
           </tr>
         </tbody>

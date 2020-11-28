@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginStatusService } from '../login-status.service';
 
 @Component({
   selector: 'app-search-store',
@@ -20,9 +22,15 @@ export class SearchStoreComponent implements OnInit {
     { id: 19, name: "Food Mart", rating: "3" },
     { id: 20, name: "Ganesh Stores", rating: "4.9" }
   ];
-  constructor() { }
-
-  ngOnInit(): void {
+  
+  constructor(private Auth: LoginStatusService, private router: Router) { 
   }
-
+  logoutUser(){
+    this.Auth.logOut();
+    this.router.navigate(['/']);
+  }
+  ngOnInit(): void {
+  
+  }
+  
 }
