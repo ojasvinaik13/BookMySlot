@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import{NgbActiveModal,NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -30,8 +31,21 @@ export class StoreComponent implements OnInit {
     { id: 19, name: "Food Mart", rating: "3" },
     { id: 20, name: "Ganesh Stores", rating: "4.9" }
   ];
-  constructor(private route: ActivatedRoute) { }
-
+  constructor(private route: ActivatedRoute, private modalService:NgbModal) { }
+  openModal(name:string, time:string, day:string)
+  {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = name;
+    modalRef.componentInstance.time = time;
+    modalRef.componentInstance.day = day;
+  }
+  public bookSlot(time:string,day:string)
+  {
+    let ind = this.days.map(e => e.name).indexOf(day);
+    let index = this.days[ind].slots.map(e => e.time).indexOf(time);
+    this.days[ind].slots[index].booked=true;
+    
+  }
   ngOnInit(): void {
     this.storeId = this.route.snapshot.paramMap.get('id')!;
     // console.log(this.storeId);
@@ -41,4 +55,36 @@ export class StoreComponent implements OnInit {
     // console.log(this.storeDetails);
   }
 
+}
+
+@Component({
+  selector:'ngbd-modal-content',
+  providers:[StoreComponent],
+  template: `
+  <div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Hi would you like to book a slot in {{name}} at {{time}} on {{day}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="bookS(time,day)">Yes,Confirm</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+`
+})
+export class NgbdModalContent{
+  
+  @Input() name: any;
+  @Input() time: any;
+  @Input() day: any;
+  
+  constructor(public activeModal: NgbActiveModal, private comp:StoreComponent){}
+  public bookS(time:string,day:string):void
+  {
+    this.comp.bookSlot(time,day);
+  }
 }
