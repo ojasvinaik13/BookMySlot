@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginStatusService } from '../login-status.service';
 
 @Component({
   selector: 'app-booked',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booked.component.css']
 })
 export class BookedComponent implements OnInit {
-
-  constructor() { }
+  logoutUser(){
+    this.Auth.logOut();
+    this.router.navigate(['/']);
+  }
+  constructor(private Auth: LoginStatusService, private router: Router) { 
+  }
 
   ngOnInit(): void {
   }

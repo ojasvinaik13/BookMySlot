@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import{NgbActiveModal,NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { LoginStatusService } from '../login-status.service';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -31,7 +33,11 @@ export class StoreComponent implements OnInit {
     { id: 19, name: "Food Mart", rating: "3" },
     { id: 20, name: "Ganesh Stores", rating: "4.9" }
   ];
-  constructor(private route: ActivatedRoute, private modalService:NgbModal) { }
+  constructor(private Auth: LoginStatusService, private router: Router, private route: ActivatedRoute, private modalService:NgbModal) { }
+  logoutUser(){
+    this.Auth.logOut();
+    this.router.navigate(['/']);
+  }
   openModal(name:string, time:string, day:string)
   {
     const modalRef = this.modalService.open(NgbdModalContent);
