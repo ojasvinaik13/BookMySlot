@@ -12,14 +12,16 @@ import { StoreComponent } from './store/store.component';
 import { SearchStoreComponent } from './search-store/search-store.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
+import { BookedComponent } from './booked/booked.component';
 const routes: Routes = [
   {path:'', component: LoginComponent},
   {path:'search',component:SearchStoreComponent},
   {path:'store/:id',component:StoreComponent},
+  {path:'booked',component:BookedComponent}
 ];
 @NgModule({
   imports:      [BrowserModule, FormsModule, Ng2SearchPipeModule,RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}), NgbModule ],
-  declarations: [ AppComponent, StoreComponent, SearchStoreComponent, LoginComponent ],
+  declarations: [ AppComponent, StoreComponent, SearchStoreComponent, LoginComponent, BookedComponent ],
   providers:[],
   exports:[RouterModule],
   bootstrap:    [ AppComponent ]

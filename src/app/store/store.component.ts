@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import{NgbActiveModal,NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
@@ -43,8 +43,7 @@ export class StoreComponent implements OnInit {
   {
     let ind = this.days.map(e => e.name).indexOf(day);
     let index = this.days[ind].slots.map(e => e.time).indexOf(time);
-    this.days[ind].slots[index].booked=true;
-    
+    this.days[ind].slots[index].booked=true;  
   }
   ngOnInit(): void {
     this.storeId = this.route.snapshot.paramMap.get('id')!;
@@ -68,7 +67,7 @@ export class StoreComponent implements OnInit {
     </button>
   </div>
   <div class="modal-body">
-    <p>Hi would you like to book a slot in {{name}} at {{time}} on {{day}}?</p>
+    <p>Would you like to book a slot in {{name}} at {{time}} on {{day}}?</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="bookS(time,day)">Yes,Confirm</button>
@@ -82,9 +81,11 @@ export class NgbdModalContent{
   @Input() time: any;
   @Input() day: any;
   
-  constructor(public activeModal: NgbActiveModal, private comp:StoreComponent){}
+  constructor(private router: Router,public activeModal: NgbActiveModal, private comp:StoreComponent){}
   public bookS(time:string,day:string):void
   {
     this.comp.bookSlot(time,day);
+    this.activeModal.close('Close click');
+    this.router.navigate(['booked']);
   }
 }
