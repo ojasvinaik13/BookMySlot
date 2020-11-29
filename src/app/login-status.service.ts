@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import {LoginComponent} from './login/login.component';
 //import 'rxjs/add/operator/map';
 //import 'rxjs/add/operator/toPromise';
@@ -41,7 +42,7 @@ export class LoginStatusService {
 
   get(id: any) {
     id = <JSON>id;
-    return this.http.get(baseUrl, id);
+    return this.http.get(baseUrl + "/" + id);
   }
 
   create(data: any) {
@@ -52,32 +53,45 @@ export class LoginStatusService {
 
 
   checkLoggedIn(user: String, pwd: String){
+    console.log(this.loggedIn)
     if(this.loggedIn[0] == user)
       return true
     return false
   }
 
   logIn(user: String, pwd: String){
-    this.loggedIn[0] = user;
-    console.log(user);
-    this.get({ }).subscribe((data: any) => {
-      if(data.email != user){
-        console.log(data)
-        return this.logOut();
+    let s: boolean;
+    var subject = new Subject<boolean>();
+    this.get(user).subscribe((data: any) => {
+      if(data == null){
+        console.log("null")
+        s = false;
       }
-      else if(data.passwd == pwd){
-        this.loggedIn[1] = pwd
-        return;
+      if(data[0].email != user){
+        console.log(data[0]['email'])
+        s = false;
+      }
+      else if(data[0].passwd == pwd){
+        console.log("login")
+        this.loggedIn[0] = user;
+        this.loggedIn[1] = pwd;
+        s = true;
       }
       else{
-        return this.logOut();
+        console.log("incorrect")
+        s = false;
       }
+
+      subject.next(s);
     })
+
+    return subject.asObservable()
   }
 
   logOut(){
     console.log("Logout");
     this.loggedIn[0] = "";
     this.loggedIn[1] = "";
+
   }
 }
