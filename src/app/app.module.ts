@@ -13,6 +13,9 @@ import { SearchStoreComponent } from './search-store/search-store.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { BookedComponent } from './booked/booked.component';
+import { HttpClientModule } from '@angular/common/http';
+
+
 const routes: Routes = [
   {path:'', component: LoginComponent},
   {path:'search',component:SearchStoreComponent},
@@ -20,7 +23,7 @@ const routes: Routes = [
   {path:'booked',component:BookedComponent}
 ];
 @NgModule({
-  imports:      [BrowserModule, FormsModule, Ng2SearchPipeModule,RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}), NgbModule ],
+  imports:      [BrowserModule, FormsModule, HttpClientModule, Ng2SearchPipeModule,RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}), NgbModule ],
   declarations: [ AppComponent, StoreComponent, SearchStoreComponent, LoginComponent, BookedComponent ],
   providers:[],
   exports:[RouterModule],
