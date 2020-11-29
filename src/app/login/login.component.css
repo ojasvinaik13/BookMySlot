@@ -1,4 +1,4 @@
-#username, #password, #logout,#submit{
+#username, #password, #logout,#submit,#submitS,#usernameS,#passwordS{
     margin: 20px;
 }
 .form-control
@@ -12,9 +12,18 @@
     padding-left: 100px;
     padding-bottom: 50px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    margin-bottom: 60px;
 }
+
 h2{
     margin: 20px;
     color: #405065;
     padding: 50px;
+}
+.or{
+    margin-left: 20px;
+    font-size: 20px;
+    color: #405065;
+    padding-left: 100px;
+    padding-right: 50px;
 }
