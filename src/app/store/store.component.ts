@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import{NgbActiveModal,NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
 import { LoginStatusService } from '../login-status.service';
 @Component({
   selector: 'app-store',
