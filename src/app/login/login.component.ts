@@ -21,21 +21,19 @@ export class LoginComponent implements OnInit {
 
   loginUser(event: any){
     event.preventDefault();
-    const target = event.target;
-    const username = target.querySelector('#username').value;
-    const password = target.querySelector('#password').value;
-    if(this.Auth.checkLoggedIn(username, password)){
-      this.router.navigate(['/search']);
-    }
-    else{
-      this.Auth.logIn(username, password)
-      if(!this.Auth.checkLoggedIn(username, password)){
+    var target = event.target;
+    var username = target.querySelector('#username').value;
+    var password = target.querySelector('#password').value;
+    this.Auth.logIn(username, password).subscribe((status) => {
+      console.log(status)
+      if(status == false){
         window.alert("Log in failed");
       }
       else{
         this.router.navigate(['/search']);
       }
-    }
+    })
+    
   }
 
   createUser(event: any){
