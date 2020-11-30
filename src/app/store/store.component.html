@@ -12,7 +12,6 @@
       
       
       <div class="time-slot" *ngFor="let slot of day.slots">    	
-        <!-- <input type="checkbox" ng-model="slot.booked" ng-disabled="slot.booked"> -->
         <div *ngIf=slot.booked class="bo" style="background:#f2dede;">
             <span style="background:#f2dede;">{{slot.time}}</span>
             <span>Booked</span>
@@ -21,10 +20,6 @@
             <span style="background:#6AB074;">{{slot.time}}</span>
             <span> <a (click)= "openModal(storeDetails.name,slot.time,day.name)">Available</a></span>
         </div>
-        <!-- <label>{{ slot.time }}<br>
-          <span *ngIf=slot.booked>Booked</span>
-           <span *ngIf=!slot.booked>Available</span> 
-        </label> -->
       </div>
       
     </div>       
