@@ -5,13 +5,14 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var { User } = require('../models/user');
 
 // => localhost:3000/Users/
-router.get('/', (req, res) => {
-    User.find( {email: req.body.email} ,(err, docs) => {
+router.get('/:user', (req, res) => {
+    console.log(req.params)
+    User.find( { "email": req.params.user} ,(err, docs) => {
         if (!err) { res.send(docs); }
         else { console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2)); }
     });
 });
-
+/*
 router.get('/:id', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -21,7 +22,7 @@ router.get('/:id', (req, res) => {
         else { console.log('Error in Retriving User :' + JSON.stringify(err, undefined, 2)); }
     });
 });
-
+*/
 
 router.post('/', (req, res) => {
     var user = new User({
