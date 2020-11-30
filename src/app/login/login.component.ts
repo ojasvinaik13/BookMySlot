@@ -13,7 +13,6 @@ var mongoose =  require('mongoose');
 export class LoginComponent implements OnInit {
 
   constructor(private Auth: LoginStatusService, private router: Router) { }
-  Users: any;
   
   ngOnInit(): void {
 
